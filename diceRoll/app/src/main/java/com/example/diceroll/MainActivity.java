@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private ImageView imageView7;
     private TextView tv_rollNumber;
     private int diceNumber = 1;
-    ArrayList<String> rollNumbers;
+    ArrayList<ArrayList<String>> listOLists;
 
 
     @Override
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rollNumbers = new ArrayList<>();
+
+        listOLists = new ArrayList<ArrayList<String>>();
         lessDiceBtn = (Button) findViewById(R.id.button2);
         moreDiceBtn = (Button) findViewById(R.id.button);
         switchView = (Button) findViewById(R.id.button3);
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             public void onClick(View v) {
                 Intent mIntent = new Intent(MainActivity.this, listActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("rollNumber" , rollNumbers);
+                bundle.putSerializable("rollNumber" , listOLists);
                 mIntent.putExtras(bundle);
                 startActivity(mIntent);
             }
@@ -137,43 +139,51 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                roll();
+                ArrayList<String> rollNumbers = new ArrayList<>();
+                rollNumbers.add(roll());
+                listOLists.add(rollNumbers);
             }
         });
 
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> rollNumbers = new ArrayList<>();
                 switch(diceNumber){
                     case 2:
-                        roll2();
-                        roll3();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        listOLists.add(rollNumbers);
                         break;
                     case 3:
-                        roll2();
-                        roll3();
-                        roll5();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll5());
+                        listOLists.add(rollNumbers);
                         break;
                     case 4:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 5:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 6:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll5();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll5());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                 }
             }
@@ -182,36 +192,42 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> rollNumbers = new ArrayList<>();
                 switch(diceNumber){
                     case 2:
-                        roll2();
-                        roll3();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        listOLists.add(rollNumbers);
                         break;
                     case 3:
-                        roll2();
-                        roll3();
-                        roll5();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll5());
+                        listOLists.add(rollNumbers);
                         break;
                     case 4:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 5:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 6:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll5();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll5());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                 }
 
@@ -221,27 +237,31 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> rollNumbers = new ArrayList<>();
                 switch(diceNumber){
                     case 4:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 5:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 6:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll5();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll5());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                 }
             }
@@ -250,19 +270,22 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> rollNumbers = new ArrayList<>();
                 switch(diceNumber){
                     case 3:
-                        roll2();
-                        roll3();
-                        roll5();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll5());
+                        listOLists.add(rollNumbers);
                         break;
                     case 6:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll5();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll5());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                 }
             }
@@ -271,21 +294,24 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> rollNumbers = new ArrayList<>();
                 switch(diceNumber){
                     case 5:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 6:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll5();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll5());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                 }
             }
@@ -294,27 +320,31 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String> rollNumbers = new ArrayList<>();
                 switch(diceNumber){
                     case 4:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 5:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                     case 6:
-                        roll2();
-                        roll3();
-                        roll4();
-                        roll5();
-                        roll6();
-                        roll7();
+                        rollNumbers.add(roll2());
+                        rollNumbers.add(roll3());
+                        rollNumbers.add(roll4());
+                        rollNumbers.add(roll5());
+                        rollNumbers.add(roll6());
+                        rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         break;
                 }
             }
@@ -323,264 +353,228 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
 
 
-    private void roll() {
+    private String roll() {
                 int randomNumber = rng.nextInt(6) + 1;
-                tv_rollNumber.setText("you rolled a " + randomNumber);
+        String number = Integer.toString(randomNumber);
 
                 switch (randomNumber) {
                     case 1:
                         imageView.setImageResource(R.drawable.dice_1);
-                        rollNumbers.add("1");
                         break;
 
                     case 2:
                         imageView.setImageResource(R.drawable.dice_2);
-                        rollNumbers.add("2");
                         break;
 
                     case 3:
                         imageView.setImageResource(R.drawable.dice_3);
-                        rollNumbers.add("3");
 
                         break;
 
                     case 4:
                         imageView.setImageResource(R.drawable.dice_4);
-                        rollNumbers.add("4");
                         break;
 
                     case 5:
                         imageView.setImageResource(R.drawable.dice_5);
-                        rollNumbers.add("5");
                         break;
 
                     case 6:
                         imageView.setImageResource(R.drawable.dice_6);
-                        rollNumbers.add("6");
                         break;
                 }
+                return number;
         }
 
 
-    private void roll2() {
+    private String roll2() {
         int randomNumber = rng.nextInt(6) + 1;
-        tv_rollNumber.setText("you rolled a " + randomNumber);
+        String number = Integer.toString(randomNumber);
 
         switch (randomNumber) {
             case 1:
                 imageView2.setImageResource(R.drawable.dice_1);
-                rollNumbers.add("1");
                 break;
 
             case 2:
                 imageView2.setImageResource(R.drawable.dice_2);
-                rollNumbers.add("2");
-                break;
+            break;
 
             case 3:
                 imageView2.setImageResource(R.drawable.dice_3);
-                rollNumbers.add("3");
                 break;
 
             case 4:
                 imageView2.setImageResource(R.drawable.dice_4);
-                rollNumbers.add("4");
                 break;
 
             case 5:
                 imageView2.setImageResource(R.drawable.dice_5);
-                rollNumbers.add("5");
                 break;
 
             case 6:
                 imageView2.setImageResource(R.drawable.dice_6);
-                rollNumbers.add("6");
                 break;
         }
+        return number;
     }
 
-    private void roll3() {
+    private String roll3() {
         int randomNumber = rng.nextInt(6) + 1;
-        tv_rollNumber.setText("you rolled a " + randomNumber);
-
+        String number = Integer.toString(randomNumber);
         switch (randomNumber) {
             case 1:
                 imageView3.setImageResource(R.drawable.dice_1);
-                rollNumbers.add("1");
                 break;
 
             case 2:
                 imageView3.setImageResource(R.drawable.dice_2);
-                rollNumbers.add("2");
                 break;
 
             case 3:
                 imageView3.setImageResource(R.drawable.dice_3);
-                rollNumbers.add("3");
                 break;
 
             case 4:
                 imageView3.setImageResource(R.drawable.dice_4);
-                rollNumbers.add("4");
                 break;
 
             case 5:
                 imageView3.setImageResource(R.drawable.dice_5);
-                rollNumbers.add("5");
                 break;
 
             case 6:
                 imageView3.setImageResource(R.drawable.dice_6);
-                rollNumbers.add("6");
                 break;
         }
+        return number;
     }
 
-    private void roll4() {
+    private String roll4() {
         int randomNumber = rng.nextInt(6) + 1;
-        tv_rollNumber.setText("you rolled a " + randomNumber);
+        String number = Integer.toString(randomNumber);
 
         switch (randomNumber) {
             case 1:
                 imageView4.setImageResource(R.drawable.dice_1);
-                rollNumbers.add("1");
                 break;
 
             case 2:
                 imageView4.setImageResource(R.drawable.dice_2);
-                rollNumbers.add("2");
                 break;
 
             case 3:
                 imageView4.setImageResource(R.drawable.dice_3);
-                rollNumbers.add("3");
                 break;
 
             case 4:
                 imageView4.setImageResource(R.drawable.dice_4);
-                rollNumbers.add("4");
                 break;
 
             case 5:
                 imageView4.setImageResource(R.drawable.dice_5);
-                rollNumbers.add("5");
                 break;
 
             case 6:
                 imageView4.setImageResource(R.drawable.dice_6);
-                rollNumbers.add("6");
                 break;
         }
+        return number;
     }
 
-    private void roll5() {
+    private String roll5() {
         int randomNumber = rng.nextInt(6) + 1;
-        tv_rollNumber.setText("you rolled a " + randomNumber);
+        String number = Integer.toString(randomNumber);
 
         switch (randomNumber) {
             case 1:
                 imageView5.setImageResource(R.drawable.dice_1);
-                rollNumbers.add("1");
                 break;
 
             case 2:
                 imageView5.setImageResource(R.drawable.dice_2);
-                rollNumbers.add("2");
                 break;
 
             case 3:
                 imageView5.setImageResource(R.drawable.dice_3);
-                rollNumbers.add("3");
                 break;
 
             case 4:
                 imageView5.setImageResource(R.drawable.dice_4);
-                rollNumbers.add("4");
                 break;
 
             case 5:
                 imageView5.setImageResource(R.drawable.dice_5);
-                rollNumbers.add("5");
                 break;
 
             case 6:
                 imageView5.setImageResource(R.drawable.dice_6);
-                rollNumbers.add("6");
                 break;
         }
+        return number;
     }
 
-    private void roll6() {
+    private String roll6() {
         int randomNumber = rng.nextInt(6) + 1;
-        tv_rollNumber.setText("you rolled a " + randomNumber);
+        String number = Integer.toString(randomNumber);
 
         switch (randomNumber) {
             case 1:
                 imageView6.setImageResource(R.drawable.dice_1);
-                rollNumbers.add("1");
                 break;
 
             case 2:
                 imageView6.setImageResource(R.drawable.dice_2);
-                rollNumbers.add("2");
                 break;
 
             case 3:
                 imageView6.setImageResource(R.drawable.dice_3);
-                rollNumbers.add("3");
                 break;
 
             case 4:
                 imageView6.setImageResource(R.drawable.dice_4);
-                rollNumbers.add("4");
                 break;
 
             case 5:
                 imageView6.setImageResource(R.drawable.dice_5);
-                rollNumbers.add("5");
                 break;
 
             case 6:
                 imageView6.setImageResource(R.drawable.dice_6);
-                rollNumbers.add("6");
                 break;
         }
+        return number;
     }
 
-    private void roll7() {
+    private String roll7() {
         int randomNumber = rng.nextInt(6) + 1;
-        tv_rollNumber.setText("you rolled a " + randomNumber);
+        String number = Integer.toString(randomNumber);
 
         switch (randomNumber) {
             case 1:
                 imageView7.setImageResource(R.drawable.dice_1);
-                rollNumbers.add("1");
                 break;
 
             case 2:
                 imageView7.setImageResource(R.drawable.dice_2);
-                rollNumbers.add("2");
                 break;
 
             case 3:
                 imageView7.setImageResource(R.drawable.dice_3);
-                rollNumbers.add("3");
                 break;
 
             case 4:
                 imageView7.setImageResource(R.drawable.dice_4);
-                rollNumbers.add("4");
                 break;
 
             case 5:
                 imageView7.setImageResource(R.drawable.dice_5);
-                rollNumbers.add("5");
                 break;
 
             case 6:
                 imageView7.setImageResource(R.drawable.dice_6);
-                rollNumbers.add("6");
                 break;
         }
+        return number;
     }
 }

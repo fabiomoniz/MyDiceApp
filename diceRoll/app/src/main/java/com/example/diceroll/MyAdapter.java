@@ -41,8 +41,13 @@ public class MyAdapter extends ArrayAdapter<String> {
         }else{
             mViewHolder = (ViewHolder) convertView.getTag();
         }
+        if(numbers[position].length() > 1){
+            mViewHolder.mDice.setImageResource(R.drawable.click);
+            mViewHolder.mName.setText("You rolled a group of " + numbers[position].length() + " die");
+        }else {
             mViewHolder.mDice.setImageResource(dices[position]);
-            mViewHolder.mName.setText(numbers[position]);
+            mViewHolder.mName.setText("You rolled a " + numbers[position]);
+        }
         return convertView;
     }
 
