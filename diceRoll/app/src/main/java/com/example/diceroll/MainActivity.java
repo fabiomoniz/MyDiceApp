@@ -1,18 +1,17 @@
 package com.example.diceroll;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
@@ -33,13 +32,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private int diceNumber = 1;
     ArrayList<ArrayList<String>> listOLists;
 
+    ArrayList<Timestamp> timeStamps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        timeStamps = new ArrayList<>();
         listOLists = new ArrayList<ArrayList<String>>();
         lessDiceBtn = (Button) findViewById(R.id.button2);
         moreDiceBtn = (Button) findViewById(R.id.button);
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView5 = findViewById(R.id.image_view_dice5);
         imageView6 = findViewById(R.id.image_view_dice6);
         imageView7 = findViewById(R.id.image_view_dice7);
+        tv_rollNumber.setText("Click the dice to roll!!!!");
 
         switchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 Intent mIntent = new Intent(MainActivity.this, listActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("rollNumber" , listOLists);
+                bundle.putSerializable("timeStamps" , timeStamps );
                 mIntent.putExtras(bundle);
                 startActivity(mIntent);
             }
@@ -142,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 ArrayList<String> rollNumbers = new ArrayList<>();
                 rollNumbers.add(roll());
                 listOLists.add(rollNumbers);
+                addTimeStamp();
             }
         });
 
@@ -154,12 +158,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 3:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
                         rollNumbers.add(roll5());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 4:
                         rollNumbers.add(roll2());
@@ -167,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll4());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 5:
                         rollNumbers.add(roll2());
@@ -175,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 6:
                         rollNumbers.add(roll2());
@@ -184,6 +192,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                 }
             }
@@ -198,12 +207,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 3:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
                         rollNumbers.add(roll5());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 4:
                         rollNumbers.add(roll2());
@@ -211,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll4());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 5:
                         rollNumbers.add(roll2());
@@ -219,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 6:
                         rollNumbers.add(roll2());
@@ -228,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                 }
 
@@ -245,6 +259,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll4());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 5:
                         rollNumbers.add(roll2());
@@ -253,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 6:
                         rollNumbers.add(roll2());
@@ -262,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                 }
             }
@@ -277,6 +294,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll3());
                         rollNumbers.add(roll5());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 6:
                         rollNumbers.add(roll2());
@@ -286,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                 }
             }
@@ -303,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 6:
                         rollNumbers.add(roll2());
@@ -312,6 +332,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                 }
             }
@@ -328,6 +349,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll4());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 5:
                         rollNumbers.add(roll2());
@@ -335,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll4());
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
-                        listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                     case 6:
                         rollNumbers.add(roll2());
@@ -345,6 +367,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
+                        addTimeStamp();
                         break;
                 }
             }
@@ -576,5 +599,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 break;
         }
         return number;
+    }
+
+    private void addTimeStamp(){
+        Date date = new Date();
+        long time = date.getTime();
+        Timestamp ts = new Timestamp(time);
+        timeStamps.add(ts);
     }
 }

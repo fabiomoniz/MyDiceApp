@@ -24,6 +24,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="120dp"
+        android:paddingLeft="60dp"
         android:text="Click for more info" />
 </LinearLayout>

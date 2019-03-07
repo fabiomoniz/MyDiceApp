@@ -1,20 +1,26 @@
 package com.example.diceroll;
 
+import android.app.ListActivity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class listActivity extends AppCompatActivity {
+public class listActivity extends AppCompatActivity implements Serializable {
 
 
     ListView mListView;
-
     ArrayList<String> rollNumber;
     ArrayList<ArrayList<String>> listOfList;
-    String[] rollNumbers = {};
+    ArrayList<Timestamp> timeStamps;
+    ArrayList<ArrayList<String>> rollNumbers;
     int[] dies = {R.drawable.dice_1,
                  R.drawable.dice_2,
                  R.drawable.dice_3,
@@ -32,19 +38,38 @@ public class listActivity extends AppCompatActivity {
 
         Bundle mBundle = getIntent().getExtras();
         listOfList = (ArrayList<ArrayList<String>>) mBundle.getSerializable("rollNumber");
+        timeStamps = (ArrayList<Timestamp>) mBundle.getSerializable("timeStamps");
         rollNumber = new ArrayList<>();
+        rollNumbers = new ArrayList<>();
         setRolls();
+
+
         mListView = (ListView) findViewById(R.id.listView);
         MyAdapter myAdapter = new MyAdapter(listActivity.this, rollNumbers, die);
         mListView.setAdapter(myAdapter);
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent mIntent = new Intent( listActivity.this, DetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listOfList" , listOfList);
+                bundle.putSerializable("timeStamps" , timeStamps );
+                mIntent.putExtras(bundle);
+                startActivity(mIntent);
+            }
+        });
+
     }
 
     void setRolls(){
-        ArrayList<String> fuck = new ArrayList<>();
+        ArrayList<ArrayList<String>> fuck = new ArrayList<>();
+
         for (int i = 0; i < listOfList.size() ; i++) {
             if (listOfList.get(i).size() == 1 ){
-                fuck.add(listOfList.get(i).get(0));
+
+                fuck.add(listOfList.get(i));
+
                 switch(listOfList.get(i).get(0)){
                     case "1":
                         die[i] = dies[0];
@@ -68,14 +93,12 @@ public class listActivity extends AppCompatActivity {
                 }
             }
             else {
-                fuck.add(Integer.toString(listOfList.get(i).size()));
+                fuck.add(listOfList.get(i));
                 die[i] = dies[6];
             }
         }
-
-        rollNumbers = fuck.toArray(new String[0]);
+        rollNumbers = fuck;
     }
-
 
 
 

@@ -5,17 +5,20 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MyAdapter extends ArrayAdapter<String> {
 
-    String [] numbers;
+    ArrayList<ArrayList<String>> numbers;
     int [] dices;
     Context mContext;
 
-    public MyAdapter(Context context, String[] rollNumbers, int[] die) {
+    public MyAdapter(Context context, ArrayList<ArrayList<String>> rollNumbers, int[] die) {
         super(context, R.layout.listview_item);
         this.numbers = rollNumbers;
         this.dices = die;
@@ -24,7 +27,7 @@ public class MyAdapter extends ArrayAdapter<String> {
 
     @Override
     public int getCount() {
-        return numbers.length;
+        return numbers.size();
     }
 
     @NonNull
@@ -41,12 +44,12 @@ public class MyAdapter extends ArrayAdapter<String> {
         }else{
             mViewHolder = (ViewHolder) convertView.getTag();
         }
-        if(numbers[position].length() > 1){
+        if(numbers.get(position).size() > 1){
             mViewHolder.mDice.setImageResource(R.drawable.click);
-            mViewHolder.mName.setText("You rolled a group of " + numbers[position].length() + " die");
+            mViewHolder.mName.setText("You rolled a group of " + numbers.get(position).size() + " dice");
         }else {
             mViewHolder.mDice.setImageResource(dices[position]);
-            mViewHolder.mName.setText("You rolled a " + numbers[position]);
+            mViewHolder.mName.setText("You rolled a " + numbers.get(position).get(0));
         }
         return convertView;
     }
