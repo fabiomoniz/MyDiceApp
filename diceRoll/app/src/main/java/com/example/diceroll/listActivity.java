@@ -53,8 +53,8 @@ public class listActivity extends AppCompatActivity implements Serializable {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent mIntent = new Intent( listActivity.this, DetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("listOfList" , listOfList);
-                bundle.putSerializable("timeStamps" , timeStamps );
+                bundle.putSerializable("listOfList" , listOfList.get(position));
+                bundle.putSerializable("timeStamps" , timeStamps.get(position));
                 mIntent.putExtras(bundle);
                 startActivity(mIntent);
             }

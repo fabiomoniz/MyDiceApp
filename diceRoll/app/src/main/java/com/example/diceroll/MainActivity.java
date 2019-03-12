@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -16,11 +17,9 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
-
     private Random rng = new Random();
-    private Button lessDiceBtn;
-    private Button moreDiceBtn;
     private Button switchView;
+    private Button clear;
     private ImageView imageView;
     private ImageView imageView2;
     private ImageView imageView3;
@@ -29,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private ImageView imageView6;
     private ImageView imageView7;
     private TextView tv_rollNumber;
-    private int diceNumber = 1;
     ArrayList<ArrayList<String>> listOLists;
+    private NumberPicker np;
 
     ArrayList<Timestamp> timeStamps;
 
@@ -42,10 +41,13 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         timeStamps = new ArrayList<>();
         listOLists = new ArrayList<ArrayList<String>>();
-        lessDiceBtn = (Button) findViewById(R.id.button2);
-        moreDiceBtn = (Button) findViewById(R.id.button);
         switchView = (Button) findViewById(R.id.button3);
+        clear = (Button) findViewById(R.id.clear);
         tv_rollNumber = (TextView) findViewById(R.id.tv_rollNumber);
+        np = (NumberPicker) findViewById(R.id.np);
+        np.setMinValue(1);
+        np.setMaxValue(6);
+
         imageView = findViewById(R.id.image_view_dice);
         imageView2 = findViewById(R.id.image_view_dice2);
         imageView3 = findViewById(R.id.image_view_dice3);
@@ -55,93 +57,36 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView7 = findViewById(R.id.image_view_dice7);
         tv_rollNumber.setText("Click the dice to roll!!!!");
 
+
         switchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mIntent = new Intent(MainActivity.this, listActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("rollNumber" , listOLists);
-                bundle.putSerializable("timeStamps" , timeStamps );
+                bundle.putSerializable("rollNumber", listOLists);
+                bundle.putSerializable("timeStamps", timeStamps );
                 mIntent.putExtras(bundle);
                 startActivity(mIntent);
             }
         });
 
-
-        lessDiceBtn.setOnClickListener(new View.OnClickListener() {
+        clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch(diceNumber){
-                    case 6:
-                        moreDiceBtn.setVisibility(View.VISIBLE);
-                        imageView5.setVisibility(View.INVISIBLE);
-                        diceNumber = 5;
-                        break;
-                    case 5:
-                        imageView6.setVisibility(View.INVISIBLE);
-                        diceNumber = 4;
-                        break;
-                    case 4:
-                        imageView5.setVisibility(View.VISIBLE);
-                        imageView4.setVisibility(View.INVISIBLE);
-                        imageView7.setVisibility(View.INVISIBLE);
-                        diceNumber = 3;
-                        break;
-                    case 3:
-                        imageView5.setVisibility(View.INVISIBLE);
-                        diceNumber = 2;
-                        break;
-                    case 2:
-                        imageView.setVisibility(View.VISIBLE);
-                        imageView2.setVisibility(View.INVISIBLE);
-                        imageView3.setVisibility(View.INVISIBLE);
-                        lessDiceBtn.setVisibility(View.INVISIBLE);
-                        diceNumber = 1;
-                        break;
-                }
+                timeStamps.clear();
+                listOLists.clear();
+                clear.setVisibility(View.INVISIBLE);
+                switchView.setVisibility(View.INVISIBLE);
             }
         });
-
-        moreDiceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch(diceNumber){
-                    case 1:
-                        imageView.setVisibility(View.INVISIBLE);
-                        imageView2.setVisibility(View.VISIBLE);
-                        imageView3.setVisibility(View.VISIBLE);
-                        lessDiceBtn.setVisibility(View.VISIBLE);
-                        diceNumber = 2;
-                        break;
-                    case 2:
-                        imageView5.setVisibility(View.VISIBLE);
-                        diceNumber = 3;
-                        break;
-                    case 3:
-                        imageView5.setVisibility(View.INVISIBLE);
-                        imageView4.setVisibility(View.VISIBLE);
-                        imageView7.setVisibility(View.VISIBLE);
-                        diceNumber = 4;
-                        break;
-                    case 4:
-                        imageView6.setVisibility(View.VISIBLE);
-                        diceNumber = 5;
-                        break;
-                    case 5:
-                        imageView5.setVisibility(View.VISIBLE);
-                        moreDiceBtn.setVisibility(View.INVISIBLE);
-                        diceNumber = 6;
-                        break;
-                }
-            }
-
-        });
-
-
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
                 rollNumbers.add(roll());
                 listOLists.add(rollNumbers);
@@ -152,8 +97,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
-                switch(diceNumber){
+                switch(np.getValue()){
                     case 2:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
@@ -201,8 +150,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
-                switch(diceNumber){
+                switch(np.getValue()){
                     case 2:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
@@ -251,8 +204,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
-                switch(diceNumber){
+                switch(np.getValue()){
                     case 4:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
@@ -287,8 +244,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
-                switch(diceNumber){
+                switch(np.getValue()){
                     case 3:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
@@ -313,8 +274,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
-                switch(diceNumber){
+                switch(np.getValue()){
                     case 5:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
@@ -341,8 +306,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         imageView7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(switchView.getVisibility() == View.INVISIBLE) {
+                    switchView.setVisibility(View.VISIBLE);
+                    clear.setVisibility(View.VISIBLE);
+                }
                 ArrayList<String> rollNumbers = new ArrayList<>();
-                switch(diceNumber){
+                switch(np.getValue()){
                     case 4:
                         rollNumbers.add(roll2());
                         rollNumbers.add(roll3());
@@ -368,6 +337,68 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll7());
                         listOLists.add(rollNumbers);
                         addTimeStamp();
+                        break;
+                }
+            }
+        });
+
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                switch (picker.getValue()){
+                    case 1:
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView2.setVisibility(View.INVISIBLE);
+                        imageView3.setVisibility(View.INVISIBLE);
+                        imageView4.setVisibility(View.INVISIBLE);
+                        imageView5.setVisibility(View.INVISIBLE);
+                        imageView6.setVisibility(View.INVISIBLE);
+                        imageView7.setVisibility(View.INVISIBLE);
+                        break;
+                    case 2:
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.INVISIBLE);
+                        imageView5.setVisibility(View.INVISIBLE);
+                        imageView6.setVisibility(View.INVISIBLE);
+                        imageView7.setVisibility(View.INVISIBLE);
+                        break;
+                    case 3:
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.INVISIBLE);
+                        imageView5.setVisibility(View.VISIBLE);
+                        imageView6.setVisibility(View.INVISIBLE);
+                        imageView7.setVisibility(View.INVISIBLE);
+                        break;
+                    case 4:
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.VISIBLE);
+                        imageView5.setVisibility(View.INVISIBLE);
+                        imageView6.setVisibility(View.INVISIBLE);
+                        imageView7.setVisibility(View.VISIBLE);
+                        break;
+                    case 5:
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.VISIBLE);
+                        imageView5.setVisibility(View.INVISIBLE);
+                        imageView6.setVisibility(View.VISIBLE);
+                        imageView7.setVisibility(View.VISIBLE);
+                        break;
+                    case 6:
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.VISIBLE);
+                        imageView5.setVisibility(View.VISIBLE);
+                        imageView6.setVisibility(View.VISIBLE);
+                        imageView7.setVisibility(View.VISIBLE);
                         break;
                 }
             }
