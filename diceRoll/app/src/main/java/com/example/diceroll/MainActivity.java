@@ -326,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         rollNumbers.add(roll4());
                         rollNumbers.add(roll6());
                         rollNumbers.add(roll7());
+                        listOLists.add(rollNumbers);
                         addTimeStamp();
                         break;
                     case 6:
@@ -341,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 }
             }
         });
-        
+
 
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override

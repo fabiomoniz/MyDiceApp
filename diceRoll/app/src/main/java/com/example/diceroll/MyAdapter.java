@@ -49,7 +49,7 @@ public class MyAdapter extends ArrayAdapter<String> {
             mViewHolder.mName.setText("You rolled a group of " + numbers.get(position).size() + " dice");
         }else {
             mViewHolder.mDice.setImageResource(dices[position]);
-            mViewHolder.mName.setText("You rolled a " + numbers.get(position).get(0));
+            mViewHolder.mName.setText("You rolled a " + numbers.get(position).get(0) + "                        ");
         }
         return convertView;
     }

@@ -15,15 +15,16 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:paddingTop="15dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="60dp"
+        android:layout_width="46dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="55dp"
         android:text="Click for more info" />
 </LinearLayout>
